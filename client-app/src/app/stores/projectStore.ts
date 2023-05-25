@@ -5,7 +5,7 @@ import agent from "../api/agent";
 export default class ProjectStore {
   projects: Project[] = [];
   selectedProject: Project | undefined = undefined;
-  editMode = false;
+  editMode = true;
   loadingInitial = false;
 
   constructor() {
