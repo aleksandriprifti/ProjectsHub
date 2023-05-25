@@ -1,17 +1,18 @@
-import React, { ChangeEvent, useState } from 'react'
-import { Button, Checkbox, Form, Segment } from 'semantic-ui-react';
+import React, { ChangeEvent, useEffect, useState } from 'react'
+import { Button, Form, Segment } from 'semantic-ui-react';
 import { Project } from '../../../app/models/Project'
+import { useStore } from '../../../app/stores/store';
+import { observer } from 'mobx-react-lite';
+import { useParams } from 'react-router-dom';
+import { Formik } from 'formik';
 
-interface Props {
-    project: Project | undefined;
-    closeForm: () => void;
-    createOrEdit: (project: Project) => void;
-}
+const ProjectForm = () => {
 
-const ProjectForm = ({ closeForm, project: selectedProejct, createOrEdit }: Props) => {
-    const [value, setValue] = useState('this');
+    const { projectStore } = useStore();
+    const { selectedProject, closeForm, createProject, updateProject, loadProjects } = projectStore;
+    const { id } = useParams<{ id: string }>();
 
-    const initialState = selectedProejct ?? {
+    const initialState = selectedProject ?? {
         id: '',
         projectName: '',
         createdAt: '',
@@ -20,17 +21,27 @@ const ProjectForm = ({ closeForm, project: selectedProejct, createOrEdit }: Prop
         teamMembers: ''
     }
 
+    // useEffect(() => {
+    //     if (id) loadProjects(id).then(project => selectedProject(project));
+    // }, [])
+
     const [project, setProject] = useState(initialState);
 
-    const handleSubmit = () => { createOrEdit(project) }
+    const handleSubmit = () => {
+        project.id ? updateProject(project) : createProject(project);
+    }
 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
         setProject({ ...project, [name]: value })
     }
 
+
     return (
         <Segment clearing>
+            {/* <Formik>
+
+            </Formik> */}
             <Form onSubmit={handleSubmit} autoComplete="off">
                 <label>Project Name</label>
                 <Form.Input
@@ -61,4 +72,4 @@ const ProjectForm = ({ closeForm, project: selectedProejct, createOrEdit }: Prop
     )
 }
 
-export default ProjectForm
+export default observer(ProjectForm)

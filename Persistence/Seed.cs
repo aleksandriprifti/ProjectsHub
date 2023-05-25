@@ -3,20 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Domain;
+using Microsoft.AspNetCore.Identity;
 
 namespace Persistence
 {
     public class Seed
     {
-        public static async Task SeedData(DataContext context)
+        public static async Task SeedData(DataContext context, UserManager<AppUser> userManager)
         {
+
+            if (!userManager.Users.Any())
+            {
+                var users = new List<AppUser>
+                {
+                    new AppUser{DisplayName = "Alex", UserName = "alex", Email = "alex@test.com"},
+                    new AppUser{DisplayName = "John", UserName = "john", Email = "john@test.com"},
+                    new AppUser{DisplayName = "Ann", UserName = "ann", Email = "ann@test.com"},
+                };
+
+                foreach (var user in users)
+                {
+                    await userManager.CreateAsync(user, "Pa$$w0rd");
+                }
+            }
+
             if (context.Projects.Any()) return;
 
             var projects = new List<Project>
             {
                 new Project
                 {
-                    Id = 1,
                     ProjectName = "ASP.NET project",
                     CreatedAt = DateTime.UtcNow.AddMonths(-2),
                     DueDate = DateTime.UtcNow.AddMonths(+4),
@@ -25,7 +41,6 @@ namespace Persistence
                 },
                 new Project
                 {
-                    Id = 2,
                     ProjectName = "ASP.NET project",
                     CreatedAt = DateTime.UtcNow.AddMonths(-2),
                     DueDate = DateTime.UtcNow.AddMonths(+6),
@@ -33,7 +48,7 @@ namespace Persistence
                 },
             };
 
-            if(context.TeamMembers.Any()) return;
+            if (context.TeamMembers.Any()) return;
 
             var teamMembers = new List<TeamMember>
             {

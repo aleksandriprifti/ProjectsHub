@@ -1,15 +1,12 @@
-import React from 'react'
-import { Project } from '../../../app/models/Project'
 import { Icon, Menu, Table, Button } from "semantic-ui-react";
+import { useStore } from '../../../app/stores/store';
+import { observer } from 'mobx-react-lite';
 
-interface Props {
-    projects: Project[];
-    selectProject: (id: string) => void;
-    openForm: () => void;
-    deleteProject: (id: string) => void;
-}
+const ProjectList = () => {
 
-const ProjectList = ({ projects, selectProject, openForm, deleteProject }: Props) => {
+    const { projectStore } = useStore();
+    const { projects, deleteProject, selectProject } = projectStore;
+
     return (
         <>
             <Button
@@ -18,7 +15,7 @@ const ProjectList = ({ projects, selectProject, openForm, deleteProject }: Props
                 icon='add'
                 floated='right'
                 label={{ basic: true, color: 'red', pointing: 'left', content: `Total of Projects: ${projects.length}` }}
-                onClick={openForm}
+                onClick={() => projectStore.openForm()}
             />
             <Table celled striped color='violet' size='small'>
                 <Table.Header>
@@ -26,9 +23,9 @@ const ProjectList = ({ projects, selectProject, openForm, deleteProject }: Props
                         <Table.HeaderCell>Id</Table.HeaderCell>
                         <Table.HeaderCell>Project Name</Table.HeaderCell>
                         <Table.HeaderCell>Created Date</Table.HeaderCell>
-                        <Table.HeaderCell>Due Date</Table.HeaderCell>
+                        {/* <Table.HeaderCell>Due Date</Table.HeaderCell> */}
                         <Table.HeaderCell>Is Active</Table.HeaderCell>
-                        <Table.HeaderCell>Team Members</Table.HeaderCell>
+                        {/* <Table.HeaderCell>Team Members</Table.HeaderCell> */}
                         <Table.HeaderCell>Actions</Table.HeaderCell>
                     </Table.Row>
                 </Table.Header>
@@ -40,14 +37,14 @@ const ProjectList = ({ projects, selectProject, openForm, deleteProject }: Props
                                 <Table.Cell>{item.id}</Table.Cell>
                                 <Table.Cell>{item.projectName}</Table.Cell>
                                 <Table.Cell>{item.createdAt}</Table.Cell>
-                                <Table.Cell>{item.dueDate}</Table.Cell>
+                                {/* <Table.Cell>{item.dueDate}</Table.Cell> */}
                                 <Table.Cell>{item.isActive}</Table.Cell>
-                                <Table.Cell>{item.teamMembers}</Table.Cell>
+                                {/* <Table.Cell>{item.teamMembers}</Table.Cell> */}
                                 <Table.Cell>
                                     <Button.Group>
-                                        <Button color="red" onClick={() => deleteProject(item.id)}>Delete</Button>
-                                        <Button.Or />
                                         <Button color="blue" onClick={() => selectProject(item.id)}>View</Button>
+                                        <Button.Or />
+                                        <Button color="red" onClick={() => deleteProject(item.id)}>Delete</Button>
                                     </Button.Group>
                                 </Table.Cell>
                             </Table.Row>
@@ -78,4 +75,4 @@ const ProjectList = ({ projects, selectProject, openForm, deleteProject }: Props
     )
 }
 
-export default ProjectList;
+export default observer(ProjectList);

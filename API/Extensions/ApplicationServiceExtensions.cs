@@ -8,7 +8,7 @@ namespace API.Extensions
 {
     public static class ApplicationServiceExtensions
     {
-        public static IServiceCollection AddApplicatoservices(this IServiceCollection services, IConfiguration config)
+        public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
         {
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();

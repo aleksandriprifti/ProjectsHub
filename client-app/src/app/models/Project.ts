@@ -6,7 +6,6 @@ export interface Project {
   createdAt: string;
   dueDate: string;
   isActive: string;
-  teamMembers: React.ReactNode;
 }
 
 export interface TeamMember {

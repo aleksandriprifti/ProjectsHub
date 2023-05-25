@@ -16,3 +16,35 @@ body {
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
+
+/*home page styles*/
+
+.masthead {
+  display: flex;
+  align-items: center;
+  background: #3e5151; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to left,
+    #decba4,
+    #3e5151
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #decba4, #3e5151) !important;
+  height: 100vh;
+}
+
+.masthead .ui.menu .ui.button,
+.ui.menu a.ui.inverted.button {
+  margin-left: 0.5em;
+}
+
+.masthead h1.ui.header {
+  font-size: 4em;
+  font-weight: normal;
+}
+
+.masthead h2 {
+  font-size: 1.7em;
+  font-weight: normal;
+}
+
+/*end home page styles*/

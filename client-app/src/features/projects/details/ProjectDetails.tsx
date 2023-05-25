@@ -1,22 +1,23 @@
 import React from 'react'
 import { Card, Icon, Button } from 'semantic-ui-react';
-import { Project } from '../../../app/models/Project';
+import { useStore } from '../../../app/stores/store';
+import { observer } from 'mobx-react-lite';
 
-interface Props {
-    project: Project;
-    cancelSelectProject: () => void;
-    //selectEditMode: (id: string) => void;
-    openForm: (id: string) => void;
-}
 
-const ProjectDetails = ({ project, cancelSelectProject, openForm }: Props) => {
+const ProjectDetails = () => {
+
+    const { projectStore } = useStore();
+    const { selectedProject: project, openForm, cancelSelectedProject } = projectStore;
+
+    if (!project) return <Button />;
+
     return (
-        <Card color='blue'>
+        <Card color='blue' fluid>
             <Card.Content >
                 <Card.Header>Project Details</Card.Header>
-                {/* <Card.Meta>
-                    <span className='date'>Joined in 2015</span>
-                </Card.Meta> */}
+                <Card.Meta>
+
+                </Card.Meta>
                 <Card.Description>
                     {project.projectName}
                     <br />
@@ -35,11 +36,11 @@ const ProjectDetails = ({ project, cancelSelectProject, openForm }: Props) => {
                 <hr />
                 <Button.Group widths='2'>
                     <Button basic color='blue' content="Edit" onClick={() => openForm(project.id)} />
-                    <Button basic color='grey' content="Cancel" onClick={cancelSelectProject} />
+                    <Button basic color='grey' content="Cancel" onClick={cancelSelectedProject} />
                 </Button.Group>
             </Card.Content>
         </Card>
     )
 }
 
-export default ProjectDetails
+export default observer(ProjectDetails);
