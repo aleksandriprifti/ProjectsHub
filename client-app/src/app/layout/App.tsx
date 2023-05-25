@@ -5,6 +5,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useStore } from '../stores/store';
 import HomePage from '../../features/home/HomePage';
+import ModalContainer from '../common/modals/ModalContainer';
 
 function App() {
   const { projectStore } = useStore();
@@ -58,6 +59,7 @@ function App() {
 
   return (
     < >
+      <ModalContainer />
       {location.pathname == '/' ? <HomePage /> : (
         <>
           <NavBar />

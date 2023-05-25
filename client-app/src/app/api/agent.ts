@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { Project, TeamMember } from "../models/Project";
+import { User, UserFormValues } from "../models/User";
 
 axios.defaults.baseURL = "http://localhost:5000/api";
 
@@ -22,6 +23,13 @@ const Projects = {
   delete: (id: string) => requests.delete<void>(`/projects/${id}`),
 };
 
+const Account = {
+  current: () => requests.get<User>("account"),
+  login: (user: UserFormValues) => requests.post<User>("/account/login", user),
+  register: (user: UserFormValues) =>
+    requests.post<User>("/account/register", user),
+};
+
 const TeamMembers = {
   list: () => requests.get<TeamMember[]>("/teamMembers"),
 };
@@ -29,6 +37,7 @@ const TeamMembers = {
 const agent = {
   Projects,
   TeamMembers,
+  Account,
 };
 
 export default agent;
