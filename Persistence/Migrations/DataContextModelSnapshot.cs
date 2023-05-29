@@ -128,9 +128,6 @@ namespace Persistence.Migrations
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("ProjectId")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
 
                     b.ToTable("TeamMembers");
@@ -264,15 +261,19 @@ namespace Persistence.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.TeamMember", b =>
+            modelBuilder.Entity("ProjectTeamMember", b =>
                 {
-                    b.HasOne("Domain.Project", "Project")
-                        .WithMany("TeamMembers")
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("ProjectsId")
+                        .HasColumnType("INTEGER");
 
-                    b.Navigation("Project");
+                    b.Property<int>("TeamMemberId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("ProjectsId", "TeamMemberId");
+
+                    b.HasIndex("TeamMemberId");
+
+                    b.ToTable("ProjectTeamMember");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -326,9 +327,19 @@ namespace Persistence.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Domain.Project", b =>
+            modelBuilder.Entity("ProjectTeamMember", b =>
                 {
-                    b.Navigation("TeamMembers");
+                    b.HasOne("Domain.Project", null)
+                        .WithMany()
+                        .HasForeignKey("ProjectsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.TeamMember", null)
+                        .WithMany()
+                        .HasForeignKey("TeamMemberId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

@@ -11,8 +11,6 @@ const ProjectDashboard = () => {
     const { projectStore } = useStore();
     const { selectedProject, editMode } = projectStore;
 
-
-
     return (
         <Grid>
             <Grid.Column width='12'>
@@ -23,7 +21,6 @@ const ProjectDashboard = () => {
                     < ProjectDetails />
                 }
                 {editMode && <ProjectForm />}
-
             </Grid.Column>
         </Grid>
     )

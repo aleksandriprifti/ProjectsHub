@@ -1,11 +1,12 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import { Project } from "../models/Project";
 import agent from "../api/agent";
+import { v4 as uuid } from "uuid";
 
 export default class ProjectStore {
   projects: Project[] = [];
   selectedProject: Project | undefined = undefined;
-  editMode = true;
+  editMode = false;
   loadingInitial = false;
 
   constructor() {
@@ -15,6 +16,7 @@ export default class ProjectStore {
   loadProjects = async () => {
     try {
       const projects = await agent.Projects.list();
+      console.log("Projects", projects);
       runInAction(() => {
         projects.forEach((project) => {
           project.createdAt = project.createdAt.split("T")[0];
@@ -45,6 +47,7 @@ export default class ProjectStore {
   };
 
   createProject = async (project: Project) => {
+    project.id = uuid();
     try {
       await agent.Projects.create(project);
       runInAction(() => {

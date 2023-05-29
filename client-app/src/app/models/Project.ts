@@ -15,5 +15,4 @@ export interface TeamMember {
   email: string;
   phoneNumber: string;
   projectId: number;
-  project: string;
 }

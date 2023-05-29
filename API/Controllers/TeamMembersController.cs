@@ -1,29 +1,23 @@
+using Application.TeamMembers;
 using Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Persistence;
 
 namespace API.Controllers
 {
+    [AllowAnonymous]
     public class TeamMembersController : BaseApiContorller
     {
-        private readonly DataContext _context;
-        public TeamMembersController(DataContext context)
+        [HttpGet] // api/projects
+        public async Task<ActionResult<List<TeamMember>>> GetMembers()
         {
-            _context = context;
-
+            return await Mediator.Send(new List.Query());
         }
 
-        [HttpGet] // api/teammembers
-        public async Task<ActionResult<List<TeamMember>>> GetTeamMembers()
+        [HttpPost]
+        public async Task<IActionResult> CreateMember(TeamMember teamMember)
         {
-            return await _context.TeamMembers.ToListAsync();
-        }
-
-        [HttpGet("{id}")]
-        public async Task<ActionResult<TeamMember>> GetTeamMembers(int id)
-        {
-            return await _context.TeamMembers.FindAsync(id);
+            return Ok(await Mediator.Send(new Create.Command { TeamMember = teamMember }));
         }
     }
 }

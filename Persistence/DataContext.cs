@@ -13,14 +13,19 @@ namespace Persistence
         public DbSet<Project> Projects { get; set; }
         public DbSet<TeamMember> TeamMembers { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
+        // protected override void OnModelCreating(ModelBuilder modelBuilder)
+        // {
+        //     base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<TeamMember>()
-                .HasOne(teamMember => teamMember.Project)
-                .WithMany(project => project.TeamMembers)
-                .HasForeignKey(teamMember => teamMember.Id);
-        }
+        //     modelBuilder.Entity<TeamMember>()
+        //         .HasOne(teamMember => teamMember.Project)
+        //         .WithMany(project => project.TeamMembers)
+        //         .HasForeignKey(teamMember => teamMember.ProjectId);
+
+        //     modelBuilder.Entity<Project>()
+        //         .HasRequired<TeamMember>(s => s.CurrentMember)
+        //         .WithMany(g => g.Projects)
+        //         .HasForeignKey<int>(s => s.CurrentGradeId);
+        // }
     }
 }

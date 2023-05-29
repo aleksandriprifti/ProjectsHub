@@ -14,8 +14,6 @@ namespace Domain
         public string PhoneNumber { get; set; }
 
         //Navigation Properties
-        [ForeignKey("Project")]
-        public int ProjectId { get; set; }
-        public Project Project { get; set; }
+        public ICollection<Project> Projects { get; set; }
     }
 }

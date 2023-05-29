@@ -13,7 +13,9 @@ namespace Domain
         public DateTime DueDate { get; set; }
         public bool IsActive { get; set; }
 
-        //Navigation properties
-        public ICollection<TeamMember> TeamMembers { get; set; }
+        //Relationship
+        //public int TeamMemberId { get; set; }
+        public ICollection<TeamMember> TeamMember { get; set; }
+
     }
 }

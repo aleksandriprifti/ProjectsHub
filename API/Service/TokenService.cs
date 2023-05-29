@@ -9,6 +9,12 @@ namespace backend.Services
 {
     public class TokenService
     {
+        private readonly IConfiguration _config;
+        public TokenService(IConfiguration config)
+        {
+            _config = config;
+
+        }
 
         public string CreateToken(AppUser user)
         {
@@ -19,7 +25,7 @@ namespace backend.Services
                 new Claim(ClaimTypes.Email, user.Email)
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("super secure key for my app which is my first application for this month next month will create another app"));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["TokenKey"]));
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
             var tokenDescriptor = new SecurityTokenDescriptor

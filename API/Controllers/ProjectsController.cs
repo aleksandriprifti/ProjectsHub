@@ -1,11 +1,11 @@
 using Application.Projects;
 using Domain;
-using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+
     [AllowAnonymous]
     public class ProjectsController : BaseApiContorller
     {
@@ -16,6 +16,7 @@ namespace API.Controllers
             return await Mediator.Send(new List.Query());
         }
 
+        [Authorize]
         [HttpGet("{id}")] //api/projects/id
         public async Task<ActionResult<Project>> GetProject(int id)
         {

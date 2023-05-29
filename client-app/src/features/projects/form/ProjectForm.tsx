@@ -9,7 +9,7 @@ import { Formik } from 'formik';
 const ProjectForm = () => {
 
     const { projectStore } = useStore();
-    const { selectedProject, closeForm, createProject, updateProject, loadProjects } = projectStore;
+    const { selectedProject, closeForm, createProject, updateProject, loadProjects, cancelSelectedProject } = projectStore;
     const { id } = useParams<{ id: string }>();
 
     const initialState = selectedProject ?? {

@@ -54,21 +54,17 @@ namespace Persistence
             {
                 new TeamMember
                 {
-                    Id = 1,
                     FirstName = "Alex",
                     LastName = "Prifti",
                     Email = "prifti24@gmail.com",
                     PhoneNumber = "5555555",
-
                 },
                 new TeamMember
                 {
-                    Id = 2,
                     FirstName = "Genti",
                     LastName = "Demo",
                     Email = "genti.demo@gmail.com",
                     PhoneNumber = "123456",
-
                 },
             };
 

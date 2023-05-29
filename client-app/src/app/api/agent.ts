@@ -15,7 +15,7 @@ const requests = {
 };
 
 const Projects = {
-  list: () => requests.get<Project[]>("/projects"),
+  list: () => requests.get<Project[]>("/Projects"),
   details: (id: string) => requests.get<Project>(`/projects/${id}`),
   create: (project: Project) => requests.post<void>("/projects", project),
   update: (project: Project) =>
@@ -31,7 +31,9 @@ const Account = {
 };
 
 const TeamMembers = {
-  list: () => requests.get<TeamMember[]>("/teamMembers"),
+  list: () => requests.get<TeamMember[]>("/TeamMembers"),
+  create: (teamMember: TeamMember) =>
+    requests.post<void>("/teamMembers", teamMember),
 };
 
 const agent = {
