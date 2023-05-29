@@ -89,9 +89,9 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Project", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("TEXT");
@@ -112,9 +112,9 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.TeamMember", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
                         .HasColumnType("TEXT");
@@ -263,11 +263,11 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("ProjectTeamMember", b =>
                 {
-                    b.Property<int>("ProjectsId")
-                        .HasColumnType("INTEGER");
+                    b.Property<Guid>("ProjectsId")
+                        .HasColumnType("TEXT");
 
-                    b.Property<int>("TeamMemberId")
-                        .HasColumnType("INTEGER");
+                    b.Property<Guid>("TeamMemberId")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("ProjectsId", "TeamMemberId");
 
