@@ -9,7 +9,7 @@ import { Formik } from 'formik';
 const ProjectForm = () => {
 
     const { projectStore } = useStore();
-    const { selectedProject, closeForm, createProject, updateProject, loadProjects, cancelSelectedProject } = projectStore;
+    const { selectedProject, closeForm, createProject, updateProject, loadProjects, cancelSelectedProject, selectProject } = projectStore;
     const { id } = useParams<{ id: string }>();
 
     const initialState = selectedProject ?? {
@@ -18,17 +18,20 @@ const ProjectForm = () => {
         createdAt: '',
         dueDate: '',
         isActive: '',
-        teamMembers: ''
     }
-
-    // useEffect(() => {
-    //     if (id) loadProjects(id).then(project => selectedProject(project));
-    // }, [])
 
     const [project, setProject] = useState(initialState);
 
+     //useEffect(() => {
+     //    if (id) loadProjects().then(project => setProject(new Project);
+        
+     //}, [id, loadProjects])
+
+    
+
     const handleSubmit = () => {
-        project.id ? updateProject(project) : createProject(project);
+        console.log("handle submit")
+        //project.id ? updateProject(project) : createProject(project);
     }
 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {

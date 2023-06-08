@@ -14,13 +14,8 @@ export default class MemberStore {
 
   loadMembers = async () => {
     try {
-      const members = await agent.TeamMembers.list();
+       const members = await agent.TeamMembers.list();
       console.log("Members", members);
-      runInAction(() => {
-        members.forEach((member) => {
-          console.log(member);
-        });
-      });
     } catch (error) {
       console.log(error);
     }

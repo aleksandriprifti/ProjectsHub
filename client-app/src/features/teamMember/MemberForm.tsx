@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
-import { Button, Form, Segment } from 'semantic-ui-react';
+import { Button, Form, Segment, Dropdown } from 'semantic-ui-react';
 import { useStore } from '../../app/stores/store';
 import { observer } from 'mobx-react-lite';
 import { useParams } from 'react-router-dom';
@@ -7,8 +7,18 @@ import { Formik } from 'formik';
 
 const MemberForm = () => {
 
-    const { memberStore } = useStore();
+    const { memberStore, projectStore } = useStore();
     const { closeForm, } = memberStore;
+
+   
+    const { projects } = projectStore;
+
+    const memeberProjects: any = projects.map(project => ({
+        value: project.id, key: project.id, text: project.projectName
+    }));
+
+   
+
     // const { id } = useParams<{ id: string }>();
 
     // const initialState = selectedProject ?? {
@@ -59,13 +69,13 @@ const MemberForm = () => {
                 //value={project.createdAt}
                 //onChange={handleInputChange}
                 />
-                <label>Proejct ID</label>
-                <Form.Input
-                    type='number'
-                    placeholder="Project ID"
-                    name="projectId"
-                //value={project.createdAt}
-                //onChange={handleInputChange}
+                <label>Select Project</label>
+                <Dropdown
+                    placeholder='Select Projectd'
+                    fluid
+                    selection
+                    options={memeberProjects}
+                    
                 />
 
                 <Button floated="right" positive type='submit' content="Submit" />

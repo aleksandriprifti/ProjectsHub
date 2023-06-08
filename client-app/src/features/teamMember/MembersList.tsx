@@ -8,6 +8,8 @@ const MembersList = () => {
     const { memberStore } = useStore();
     const { members, openForm } = memberStore;
 
+    console.log("Members", members.map(item => item.firstName));
+
 
     return (
         <>
@@ -40,7 +42,7 @@ const MembersList = () => {
                                 <Table.Cell>{item.email}</Table.Cell>
                                 {/* <Table.Cell>{item.dueDate}</Table.Cell> */}
                                 <Table.Cell>{item.phoneNumber}</Table.Cell>
-                                <Table.Cell>{item.projectId}</Table.Cell>
+                                <Table.Cell>{item.projectName}</Table.Cell>
                                 <Table.Cell>
                                     <Button.Group>
                                         <Button color="blue" >View</Button>

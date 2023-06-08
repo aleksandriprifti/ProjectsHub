@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { v4 as uuid } from "uuid";
 
 export interface Project {
   id: string;
@@ -9,10 +10,12 @@ export interface Project {
 }
 
 export interface TeamMember {
-  id: number;
+  id: { $uuid: any };
   firstName: string;
   lastName: string;
   email: string;
   phoneNumber: string;
-  projectId: number;
+  projectName: string;
 }
+
+

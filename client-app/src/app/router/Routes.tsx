@@ -4,6 +4,7 @@ import ProjectList from "../../features/projects/dashboard/ProjectList";
 import LoginForm from "../../features/users/LoginForm";
 import MembersDashboard from "../../features/teamMember/MembersDashboard";
 import ProjectDashboard from "../../features/projects/dashboard/ProjectDashboard";
+import DashBoards from '../../features/DashBoard/Dashboards';
 
 export const routes: RouteObject[] = [
     {
@@ -13,7 +14,7 @@ export const routes: RouteObject[] = [
             { path: 'projects', element: <ProjectDashboard /> },
             { path: 'teammembers', element: <MembersDashboard /> },
             { path: 'login', element: <LoginForm /> },
-
+            { path: 'dashboards', element: <DashBoards /> },
         ]
     }
 ]
